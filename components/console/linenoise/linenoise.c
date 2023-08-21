@@ -1163,12 +1163,14 @@ void linenoiseFree(void *ptr) {
 
 void linenoiseHistoryFree(void) {
     if (history) {
-        for (int j = 0; j < history_len; j++) {
+        int j;
+
+        for (j = 0; j < history_len; j++)
             free(history[j]);
-        }
         free(history);
+        history = NULL;
+        history_len = 0;
     }
-    history = NULL;
 }
 
 /* This is the API call to add a new entry in the linenoise history.
